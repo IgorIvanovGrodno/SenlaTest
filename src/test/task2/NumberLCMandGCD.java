@@ -53,13 +53,17 @@ public class NumberLCMandGCD {
 
     }
 
-    //Функция возвращает наименьшее общее кратное двух чисел
+    /*
+    *Функция возвращает наименьшее общее кратное двух чисел
+    */
     public static int lcm(int firstNumber, int secondNumber){
         return Math.abs(firstNumber * secondNumber) / gcd(firstNumber, secondNumber) ;
     }
 
 
-    //Функция возвращает наибольший общий делитель двух чисел
+    /*
+    *Функция возвращает наибольший общий делитель двух чисел
+    */
     public static int gcd(int firstNumber, int secondNumber){
         if(firstNumber==0&secondNumber==0) return 1;
         return secondNumber == 0 ? Math.abs(firstNumber) : gcd(secondNumber, firstNumber % secondNumber);

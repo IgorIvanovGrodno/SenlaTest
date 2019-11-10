@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
 public class CounterWords {
 
     public static void main(String[] args) {
@@ -24,6 +25,7 @@ public class CounterWords {
                 text = bufferedReader.readLine();
                 System.out.println("Please, enter pattern word for count");
                 pattern = bufferedReader.readLine();
+
                 //Проверяем не ввел ли пользователь пустые строки
                 if(!(text.isEmpty()|pattern.isEmpty())) break;
                 else System.out.println("Text and pattern should not be empty");
@@ -35,9 +37,15 @@ public class CounterWords {
         System.out.println("Word repeat "+countWord(text, pattern));
     }
 
-    //Функция принимает текст и слово для поиска и возвращает сколько раз слово встречается в тексте
+    /*
+    *Функция принимает текст и слово для поиска и возвращает сколько раз слово встречается в тексте
+    */
     public static int countWord(String text, String pattern){
-        text=text.replaceAll("[\\p{Punct}&&[^-']]", " ").toLowerCase();
+        if(text==null|pattern==null) return -1;
+        String[] arr = ("  "+text+"  ").toLowerCase().split("[\\p{Space}\\p{Punct}]"+pattern.toLowerCase()+"[\\p{Space}\\p{Punct}]");
+        return arr.length-1;
+
+       /* text=text.replaceAll("[\\p{Punct}&&[^-']]", " ").toLowerCase();
         text = " "+text+" ";
         pattern =" "+pattern.toLowerCase()+" ";
         int count = 0;
@@ -48,6 +56,6 @@ public class CounterWords {
             count++;
             index = text.indexOf(pattern, index + 1);
         }
-        return count;
+        return count;*/
     }
 }

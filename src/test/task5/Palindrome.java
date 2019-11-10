@@ -18,12 +18,14 @@ public class Palindrome {
 
     public static void main(String[] args) {
         double number = 0;
+
         //Считываем из консоли число, границу последовательности
         try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
             String inputNumber;
             while(true){
                 System.out.println("Please, enter number");
                 inputNumber=bufferedReader.readLine();
+
                 //Проверяем корректность ввода числа(по условию задачи не сказано должно быть целое число или нет, поэтому принимаем и дробные)
                 if((!inputNumber.isEmpty())&inputNumber.matches("^[0-9]+\\.?[0-9]*")){
                     number = Double.parseDouble(inputNumber);
@@ -31,6 +33,7 @@ public class Palindrome {
                     System.out.println("Number isn't correct");
                     continue;
                 }
+
                 //Проверяем входит ли введенное число в заданные диапазон
                 if(number>=0&number<=100) break;
                 else System.out.println("Number should be in the range [0;100]");
@@ -43,7 +46,9 @@ public class Palindrome {
 
     }
 
-    //Функция принимает число number и выводит на консоль палиндромы чисел от 0 до number
+    /*
+    *Функция принимает число number и выводит на консоль палиндромы чисел от 0 до number
+    */
     public static void outPalindromToConsole(double number){
         int i=0;
         while(i<palindromeNumbers.length&&palindromeNumbers[i]<=number){

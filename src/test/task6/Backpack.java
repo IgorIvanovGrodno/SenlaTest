@@ -19,7 +19,7 @@ public class Backpack {
 
     public Backpack(int carryingCapacity){
         this.carryingCapacityMax = carryingCapacity;
-        containsThings = new ArrayList<Thing>();
+        containsThings = new ArrayList<>();
         summaryValue=0;
     }
 
@@ -29,7 +29,6 @@ public class Backpack {
     * только те вещи, добавление которых даст максимальную
     * суммарную ценность.
     */
-
     public void maximizationValueFilling(ArrayList<Thing> things) {
         int numberItems = things.size();
 
@@ -81,15 +80,12 @@ public class Backpack {
     /*
     * Метод выводит на консоль параметры рюкзака и его содержимое
     */
-
     public void displayContaisThings(){
         System.out.println("Backpack capacity="+ carryingCapacityMax+" values="+summaryValue+" contains:");
         for(Thing thing:containsThings){
             System.out.println(thing);
         }
     }
-
-
 
     public int getCarryingCapacity() {
         return carryingCapacityMax;
