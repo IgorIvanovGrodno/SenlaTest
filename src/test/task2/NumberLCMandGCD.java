@@ -1,3 +1,12 @@
+/*
+ * NumberLCMandGCD
+ * Класс считывает два вводимых целых числа из консоли. Затем вычисляет наименьшее общее кратное и наибольший общий делитель двухвведенных чисел.
+ * Результат вычислений выводится на консоль.
+ * *
+ * Автор: Иванов Игорь
+ * Контакты: igor.ivanov.grodno@gmail.com
+ * */
+
 package test.task2;
 
 import java.io.BufferedReader;
@@ -10,6 +19,7 @@ public class NumberLCMandGCD {
         int firstNumber=0;
         int secondNumber=0;
 
+        //Считываем числа из консоли
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
             String firstNumberInput;
             String secondNumberInput;
@@ -18,6 +28,13 @@ public class NumberLCMandGCD {
                 firstNumberInput = bufferedReader.readLine();
                 secondNumberInput = bufferedReader.readLine();
 
+                //Проверяем не ввел ли пользователь пустую строку
+                if(firstNumberInput.isEmpty()|secondNumberInput.isEmpty()){
+                    System.out.println("Input data should not be empty");
+                    continue;
+                }
+
+                //Проверяем ввел ли пользователь целые числа
                 if (firstNumberInput.matches("^-?[0-9]+")&secondNumberInput.matches("^-?[0-9]+")) {
                     firstNumber = Integer.parseInt(firstNumberInput);
                     secondNumber = Integer.parseInt(secondNumberInput);
@@ -36,15 +53,13 @@ public class NumberLCMandGCD {
 
     }
 
-    //Function for search least common multiple
-
+    //Функция возвращает наименьшее общее кратное двух чисел
     public static int lcm(int firstNumber, int secondNumber){
         return Math.abs(firstNumber * secondNumber) / gcd(firstNumber, secondNumber) ;
     }
 
 
-    // Function for search greatest common divisor
-
+    //Функция возвращает наибольший общий делитель двух чисел
     public static int gcd(int firstNumber, int secondNumber){
         if(firstNumber==0&secondNumber==0) return 1;
         return secondNumber == 0 ? Math.abs(firstNumber) : gcd(secondNumber, firstNumber % secondNumber);
