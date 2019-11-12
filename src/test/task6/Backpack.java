@@ -1,11 +1,11 @@
 /*
  * Backpack
- * Класс представляет собой рюкзак определенной грузоподъемности.
- * Рюкзак содержит набор помещенных в него вещей и имеет функцию,
- * которая помещает в рюкзак вещи с максимизацией суммарной ценности.
+ * The class is a backpack of a certain carrying capacity.
+ * The backpack contains a list of things placed in it and has a function,
+ * which puts things in a backpack with maximization of the total value.
  *
- * Автор: Иванов Игорь
- * Контакты: igor.ivanov.grodno@gmail.com
+ * Author: Igor Ivanov
+ * E-mail: igor.ivanov.grodno@gmail.com
  */
 
 package test.task6;
@@ -17,77 +17,74 @@ public class Backpack {
     private int summaryValue;
     private ArrayList<Thing> containsThings;
 
-    public Backpack(int carryingCapacity){
+    public Backpack(int carryingCapacity) {
         this.carryingCapacityMax = carryingCapacity;
-        containsThings = new ArrayList<>();
-        summaryValue=0;
     }
 
-    /*
-    * Метод принимает список вещей. С учетом
-    * их веса и ценности метод добавляет в containsThings
-    * только те вещи, добавление которых даст максимальную
-    * суммарную ценность.
-    */
+    /**
+     * The method accepts a list of things.
+     * The method adds to containsThings
+     * only those things, the addition of which will give the maximum
+     * total value.
+     *
+     * @param things
+     */
     public void maximizationValueFilling(ArrayList<Thing> things) {
+        if (things == null) return;
         int numberItems = things.size();
+        containsThings = new ArrayList<>();
 
-        //Создаем таблицу суммарных ценностей в зависимости от количества элементов и грузоподъемности рюкзака.
-        //С помощью таблицы будем искать максимальную суммарную ценность, которая будет находится после заполнения
-        // в элементе mtrix[numberItems][carryingCapacityMax]
+        //We create a table of total values ​​depending on the number of elements and the carrying capacity of the backpack.
+        //Using the table, we will search for the maximum total value that will be found after filling
+        //in the matrix[numberItems][carryingCapacityMax]
         int[][] matrix = new int[numberItems + 1][carryingCapacityMax + 1];
 
-        //Инициализируем первую линию нулями
+        //Initialize the first line with zeros
         for (int i = 0; i <= carryingCapacityMax; i++) {
             matrix[0][i] = 0;
         }
 
-        //Заполняем таблицу
+        //Fill the table
         for (int i = 1; i <= numberItems; i++) {
             for (int j = 0; j <= carryingCapacityMax; j++) {
 
-                //Если вес элемента больше чем вместимость рюкзака, то добавляем в ячейку значение из предыдущей линии
-                if (things.get(i-1).getWeight() > j)
+                //If the weight of the item is greater than the capacity of the backpack, then add the value from the previous line to the cell
+                if (things.get(i - 1).getWeight() > j)
                     matrix[i][j] = matrix[i - 1][j];
 
-                //Иначе определяем: суммарная ценность будет выше с добавлением текущего элемента, или без его добавления(значение из предыдущей линии)
-                //Ячейке присваиваем максимальное значение
+                    //Else, we determine: the total value will be higher with the addition of the current element, or without its addition (value from the previous line)
+                    //The cell is assigned the maximum value
                 else
-                    matrix[i][j] = Math.max(matrix[i - 1][j], matrix[i - 1][j - things.get(i-1).getWeight()] +
-                            things.get(i-1).getValue());
+                    matrix[i][j] = Math.max(matrix[i - 1][j], matrix[i - 1][j - things.get(i - 1).getWeight()] +
+                            things.get(i - 1).getValue());
             }
         }
         summaryValue = matrix[numberItems][carryingCapacityMax];
 
-        //Определив максимально возможную суммарную ценность, определяем вещи которые нужно добавить в рюкзак
+        //Determine the things you need to add to the backpack
         int bufValue = summaryValue;
         int bufCapacity = carryingCapacityMax;
 
-        for (int i = numberItems; i > 0  &&  bufValue > 0; i--) {
+        for (int i = numberItems; i > 0 && bufValue > 0; i--) {
 
-            //Если значение в текущей ячейке и в ячейке в предыдущей линии не равны, то добавление текущего элемента
-            // максимизирует суммарную ценность и мы его добавляем в рюкзак
-            if (bufValue != matrix[i-1][bufCapacity]) {
-                containsThings.add(things.get(i-1));
+            //If the value in the current cell and in the cell in the previous line are not equal, then adding the current element maximizes the total value and we add it to the backpack
+            if (bufValue != matrix[i - 1][bufCapacity]) {
+                containsThings.add(things.get(i - 1));
 
-                //Минусуем грузоподъемность рюкзака и суммарную ценность, т.к. элемент был добавлен в рюкзак
-                bufValue -= things.get(i-1).getValue();
-                bufCapacity -= things.get(i-1).getWeight();
+                //We pass the carrying capacity of the backpack and the total value, because item was added to backpack
+                bufValue -= things.get(i - 1).getValue();
+                bufCapacity -= things.get(i - 1).getWeight();
             }
         }
     }
 
-    /*
-    * Метод выводит на консоль параметры рюкзака и его содержимое
-    */
-    public void displayContaisThings(){
-        System.out.println("Backpack capacity="+ carryingCapacityMax+" values="+summaryValue+" contains:");
-        for(Thing thing:containsThings){
+    /**
+     * The method displays the parameters of the backpack and its contents on the console
+     */
+    public void displayContaisThings() {
+        System.out.println("Backpack capacity=" + carryingCapacityMax + " values=" + summaryValue + " contains:");
+        for (Thing thing : containsThings) {
             System.out.println(thing);
         }
-    }
-
-    public int getCarryingCapacity() {
-        return carryingCapacityMax;
     }
 }

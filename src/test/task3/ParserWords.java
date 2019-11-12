@@ -1,9 +1,11 @@
 /*
  * ParserWords
- * Класс считывает строку из консоли. Затем подсчитывает и выводит на консоль количество слов в предложении, сортирует слова и выводит их на консоль с заглавной буквы.
  *
- * Автор: Иванов Игорь
- * Контакты: igor.ivanov.grodno@gmail.com
+ * The class reads a string from the console.
+ * Then it counts and displays the number of words in the sentence on the console, sorts the words and displays them on the console with a uppercase first letter.
+ *
+ * Author: Igor Ivanov
+ * E-mail: igor.ivanov.grodno@gmail.com
  * */
 
 package test.task3;
@@ -20,49 +22,53 @@ public class ParserWords {
     public static void main(String[] args) {
         String text = null;
 
-        //Считываем строку из консоли
-        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))){
-            while(true) {
+        //Read a line from the console
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+            while (true) {
                 System.out.println("Please, enter text");
                 text = bufferedReader.readLine();
 
-                //Проверяем не ввел ли пользователь пустую строку
-                if(!text.isEmpty()) break;
+                //Check if the user entered an empty string
+                if (!text.isEmpty()) break;
                 else System.out.println("Tetx should not be empty");
             }
+
+            parser(text);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-       parser(text);
+
     }
 
-    /*
-    *Функция парсит слова в переданном тексте. Подсчитывает их количество, сортирует и выводит их на консоль с заглавной буквы
-    */
-    public static void parser(String text){
-        if(text==null) return;
-        ArrayList<String> listWords=new ArrayList<>();
+    /**
+     * The method parses the words in the transmitted text. Counts their number, sorts and displays them on the console with a uppercase first letter
+     *
+     * @param text
+     */
+    public static void parser(String text) {
+        if (text == null) return;
+        ArrayList<String> listWords = new ArrayList<>();
 
-        //Парсим слова разделенные пробелом
+        //Separate words
         String[] arrayWords = text.split(" ");
 
-            for (String word: arrayWords){
+        for (String word : arrayWords) {
 
-                //Удаляем знаки пунктуации в начале слова и в конце(например могут встречаться запятые в конце слова или кавычки в начале и в конце)
-               word=word.replaceAll("^\\p{Punct}+","").replaceAll("\\p{Punct}+$","");
+            //We remove punctuation marks at the beginning of the word and at the end (for example, there may be commas at the end of the word or quotation marks at the beginning and at the end)
+            word = word.replaceAll("^\\p{Punct}+", "").replaceAll("\\p{Punct}+$", "");
 
-               //Проверяем правильно ли написано слово: нет ли в слове цифр, знаков пунктуации (кроме дефиса, который может встречаться в сложных словах Царь-пушкаи т.д.; и апострофа, который встречается в английских словах)
+            //We check whether the word is spelled correctly: whether there are numbers or punctuation marks in the word (except for the hyphen that can be found in complex words of Царь-пушка, etc .; and the apostrophe that occurs in English words)
+            if (word.matches("[^0-9№\\p{Punct}]+[-']?[^0-9№\\p{Punct}]*")) {
 
-                if(word.matches("[^0-9№\\p{Punct}]+[-']?[^0-9№\\p{Punct}]*")) {
-
-                    //Если слово написано правильно, добавляем его в итоговый список и делаем первую букву заглавной
-                    listWords.add(word.substring(0,1).toUpperCase()+word.substring(1));
-                }
-
+                //If the word is spelled correctly, add it to the final list and make the first letter capital
+                listWords.add(word.substring(0, 1).toUpperCase() + word.substring(1));
             }
+
+        }
         Collections.sort(listWords);
-        System.out.println("Total number words = "+listWords.size());
+        System.out.println("Total number words = " + listWords.size());
         System.out.println(listWords);
 
     }

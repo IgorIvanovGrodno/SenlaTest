@@ -1,10 +1,10 @@
 /*
  * Solution
- * Класс создает список вещей(Thing), предназначенных для размещения в рюкзаке(Backpack).
- * И передает этот список в метод Backpack для размещения вещей с максимизацией суммарной ценности
+ * The class creates a list of things (Thing) intended for placement in a backpack (Backpack).
+ * And passes this list to the Backpack method to place things with maximized total value
  *
- * Автор: Иванов Игорь
- * Контакты: igor.ivanov.grodno@gmail.com
+ * Author: Igor Ivanov
+ * E-mail: igor.ivanov.grodno@gmail.com
  */
 package test.task6;
 
@@ -14,20 +14,22 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        //Создаем список вещей, которые будут переданы для упаковки в рюкзак Backpack
+        //Create a list of items that will be handed over for packing in a backpack
         ArrayList<Thing> listThing = new ArrayList<>();
-        listThing.add(new Thing(5,3,"compass"));
-        listThing.add(new Thing(10,5,"knife"));
-        listThing.add(new Thing(6,4,"water"));
-        listThing.add(new Thing(5,2,"smartphone"));
+        listThing.add(new Thing(5, 3, "compass"));
+        listThing.add(new Thing(10, 5, "knife"));
+        listThing.add(new Thing(6, 4, "water"));
+        listThing.add(new Thing(5, 2, "smartphone"));
 
-        //Создаем рюкзак грузоподъемностью 14
+        //Create a backpack with a carrying capacity of 14
         Backpack backpack = new Backpack(14);
 
-        //Передаем список вещей для размещения их в рюкзаке с максимизацией суммарной ценности
+
+        // Pass a list of things to put them in a backpack with maximizing the total value
         backpack.maximizationValueFilling(listThing);
 
-        //Выводим на консоль содержимое рюкзака
+
+        // Print the contents of the backpack to the console
         backpack.displayContaisThings();
 
     }

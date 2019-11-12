@@ -1,10 +1,10 @@
 /*
  * Thing
- * Класс представляет собой вещь, которая имеет своё название, ценность, вес.
- * Она может быть помещена в коллекцию объекта Backpack
+ * A class is a thing that has name, value, weight.
+ * It can be placed in a collection of Backpack
  *
- * Автор: Иванов Игорь
- * Контакты: igor.ivanov.grodno@gmail.com
+ * Author: Igor Ivanov
+ * E-mail: igor.ivanov.grodno@gmail.com
  */
 package test.task6;
 
@@ -25,10 +25,6 @@ public class Thing {
 
     public int getValue() {
         return value;
-    }
-
-    public String getName() {
-        return name;
     }
 
     @Override

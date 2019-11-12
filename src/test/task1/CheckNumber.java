@@ -1,11 +1,11 @@
 /*
-* CheckNumber
-* Класс считывает вводимое целое число из консоли. Затем проверяет является ли число четным-нечетным, целым-составным.
-* Результат проверки выводится на консоль
-* *
-* Автор: Иванов Игорь
-* Контакты: igor.ivanov.grodno@gmail.com
-* */
+ * CheckNumber
+ * The class reads the input integer from the console. Then it checks if the number is even-odd, integer-composite.
+ * The result of the verification is displayed on the console.
+ *
+ * Author: Igor Ivanov
+ * E-mail: igor.ivanov.grodno@gmail.com
+ * */
 
 package test.task1;
 
@@ -20,40 +20,43 @@ public class CheckNumber {
 
         long number = 0;
 
-            //Считываем число из консоли
-            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
-                String inputData;
-                while (true) {
-                    System.out.println("Please, enter number(integer)");
-                    inputData = bufferedReader.readLine();
+        //Read the number from the console
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+            String inputData;
+            while (true) {
+                System.out.println("Please, enter number(integer)");
+                inputData = bufferedReader.readLine();
 
-                    //Проверяем не ввел ли пользователь пустую строку
-                    if(inputData.isEmpty()) {
-                        System.out.println("Input data should not be empty");
-                        continue;
-                    }
-
-                    //Проверяем ввел ли пользователь целое число
-                    if (inputData.matches("^-?[0-9]+")) {
-                        number = Long.parseLong(inputData);
-                        break;
-                    } else {
-                        System.out.println("Incorrect number");
-
-                    }
+                //Check if the user entered an empty string
+                if (inputData==null||inputData.isEmpty()) {
+                    System.out.println("Input data should not be empty");
+                    continue;
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
-        checkNumberEven(number);
-        checkNumberPrime(number);
+                //Check if the user entered an integer
+                if (inputData.matches("^-?[0-9]+")) {
+                    number = Long.parseLong(inputData);
+                    break;
+                } else {
+                    System.out.println("Incorrect number");
+
+                }
+            }
+            checkNumberEven(number);
+            checkNumberPrime(number);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    /*
-    *Функция для проверки числа на четность. Результат проверки выводится на консоль.
-    */
+
+    /**
+     *
+     * The method for checking the number for even-odd. The result of the verification is displayed on the console.
+     *
+     * @param number
+     */
     public static void checkNumberEven(long number) {
 
         if (number % 2 == 0) System.out.println("Number is even");
@@ -61,27 +64,29 @@ public class CheckNumber {
 
     }
 
-    /*
-    *Функция проверки числа на целое-составное. Результат проверки выводится на консоль
-    */
+    /**
+     * The method for checking the number for prime-composite. The result of the verification is displayed on the console.
+     *
+     * @param number
+     */
     public static void checkNumberPrime(long number) {
 
-        //Проверяем является ли число натуральным
-        if(number<=0){
+        //Check if the number is a natural.
+        if (number <= 0) {
             System.out.println("Number isn't natural number");
             return;
         }
 
-        //Проверяем является личисло целым
-        boolean flag = false;
+        //Check if the number is a prime.
+        String strResult = "prime";
         for (int i = 2; i < number; i++) {
             if (number % i == 0) {
-                flag = true;
+                strResult = "composite";
                 break;
             }
         }
-        if (flag) System.out.println("Number is composite");
-        else System.out.println("Number is prime");
+
+        System.out.println("Number is "+strResult);
     }
 
 

@@ -1,9 +1,10 @@
 /*
  * CounterWords
- * Класс считывает текст из консоли и слово для поиска. Затем подсчитывает ивыводит на консоль сколько раз встречается заданное слово в тексте без учета регистра.
+ * The class reads text from the console and the search word.
+ * Then it counts and displays on the console how many times a given word occurs in the text, not case sensitive.
  *
- * Автор: Иванов Игорь
- * Контакты: igor.ivanov.grodno@gmail.com
+ * Author: Igor Ivanov
+ * E-mail: igor.ivanov.grodno@gmail.com
  * */
 package test.task4;
 
@@ -18,44 +19,39 @@ public class CounterWords {
         String text = null;
         String pattern = null;
 
-        //Считываем текст и слово для поиска из консоли
-        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))){
-            while(true) {
+        //We read the text and the word to search from the console
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+            while (true) {
                 System.out.println("Please, enter text");
                 text = bufferedReader.readLine();
                 System.out.println("Please, enter pattern word for count");
                 pattern = bufferedReader.readLine();
 
-                //Проверяем не ввел ли пользователь пустые строки
-                if(!(text.isEmpty()|pattern.isEmpty())) break;
+                //Check if user entered empty lines
+                if (!(text.isEmpty() || pattern.isEmpty())) break;
                 else System.out.println("Text and pattern should not be empty");
             }
+
+            System.out.println("Word repeat " + countWord(text, pattern));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Word repeat "+countWord(text, pattern));
+
     }
 
-    /*
-    *Функция принимает текст и слово для поиска и возвращает сколько раз слово встречается в тексте
-    */
-    public static int countWord(String text, String pattern){
-        if(text==null|pattern==null) return -1;
-        String[] arr = ("  "+text+"  ").toLowerCase().split("[\\p{Space}\\p{Punct}]"+pattern.toLowerCase()+"[\\p{Space}\\p{Punct}]");
-        return arr.length-1;
+    /**
+     * The method takes the text and the word to search and returns how many times the word occurs in the text
+     *
+     * @param text
+     * @param pattern
+     * @return int
+     */
+    public static int countWord(String text, String pattern) {
+        if (text == null || pattern == null) return -1;
+        String[] arr = ("  " + text + "  ").toLowerCase().split("[\\p{Space}\\p{Punct}]" + pattern.toLowerCase() + "[\\p{Space}\\p{Punct}]");
+        return arr.length - 1;
 
-       /* text=text.replaceAll("[\\p{Punct}&&[^-']]", " ").toLowerCase();
-        text = " "+text+" ";
-        pattern =" "+pattern.toLowerCase()+" ";
-        int count = 0;
-
-        int index = text.indexOf(pattern);
-
-        while (index >= 0) {
-            count++;
-            index = text.indexOf(pattern, index + 1);
-        }
-        return count;*/
     }
 }
