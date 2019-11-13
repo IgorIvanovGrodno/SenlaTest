@@ -18,7 +18,8 @@ public class CheckNumber {
 
     public static void main(String[] args) {
 
-        long number = 0;
+        //The conditions of the task do not discuss the range of input data, so we use int instead of BigInteger
+        int number = 0;
 
         //Read the number from the console
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
@@ -28,14 +29,14 @@ public class CheckNumber {
                 inputData = bufferedReader.readLine();
 
                 //Check if the user entered an empty string
-                if (inputData==null||inputData.isEmpty()) {
+                if (inputData == null || inputData.isEmpty()) {
                     System.out.println("Input data should not be empty");
                     continue;
                 }
 
                 //Check if the user entered an integer
-                if (inputData.matches("^-?[0-9]+")) {
-                    number = Long.parseLong(inputData);
+                if (inputData.matches("^-?\\d+")) {
+                    number = Integer.parseInt(inputData);
                     break;
                 } else {
                     System.out.println("Incorrect number");
@@ -52,12 +53,11 @@ public class CheckNumber {
 
 
     /**
-     *
      * The method for checking the number for even-odd. The result of the verification is displayed on the console.
      *
      * @param number
      */
-    public static void checkNumberEven(long number) {
+    public static void checkNumberEven(int number) {
 
         if (number % 2 == 0) System.out.println("Number is even");
         else System.out.println("Number is odd");
@@ -69,7 +69,7 @@ public class CheckNumber {
      *
      * @param number
      */
-    public static void checkNumberPrime(long number) {
+    public static void checkNumberPrime(int number) {
 
         //Check if the number is a natural.
         if (number <= 0) {
@@ -86,7 +86,7 @@ public class CheckNumber {
             }
         }
 
-        System.out.println("Number is "+strResult);
+        System.out.println("Number is " + strResult);
     }
 
 

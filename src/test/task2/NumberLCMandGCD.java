@@ -16,6 +16,8 @@ import java.io.InputStreamReader;
 public class NumberLCMandGCD {
 
     public static void main(String[] args) {
+
+        //The conditions of the task do not discuss the range of input data, so we use int instead of BigInteger
         int firstNumber = 0;
         int secondNumber = 0;
 
@@ -35,7 +37,7 @@ public class NumberLCMandGCD {
                 }
 
                 //Check if user entered integers
-                if (firstNumberInput.matches("^-?[0-9]+") && secondNumberInput.matches("^-?[0-9]+")) {
+                if (firstNumberInput.matches("^-?\\d+") && secondNumberInput.matches("^-?\\d+")) {
                     firstNumber = Integer.parseInt(firstNumberInput);
                     secondNumber = Integer.parseInt(secondNumberInput);
                     break;

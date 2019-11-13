@@ -28,7 +28,7 @@ public class Palindrome {
                 inputNumber = bufferedReader.readLine();
 
                 //We check the correctness of the input of the number (according to the condition of the problem, it does not say there should be an integer or not, therefore we accept fractional ones)
-                if (inputNumber != null && (!inputNumber.isEmpty()) && inputNumber.matches("^[0-9]+\\.?[0-9]*")) {
+                if (inputNumber != null && (!inputNumber.isEmpty()) && inputNumber.matches("^\\d+\\.?\\d*")) {
                     number = Double.parseDouble(inputNumber);
                 } else {
                     System.out.println("Number isn't correct");

@@ -83,6 +83,10 @@ public class Backpack {
      */
     public void displayContaisThings() {
         System.out.println("Backpack capacity=" + carryingCapacityMax + " values=" + summaryValue + " contains:");
+        if (containsThings == null) {
+            System.out.println("backpack is empty");
+            return;
+        }
         for (Thing thing : containsThings) {
             System.out.println(thing);
         }

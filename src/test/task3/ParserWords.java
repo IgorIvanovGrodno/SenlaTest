@@ -60,12 +60,11 @@ public class ParserWords {
             word = word.replaceAll("^\\p{Punct}+", "").replaceAll("\\p{Punct}+$", "");
 
             //We check whether the word is spelled correctly: whether there are numbers or punctuation marks in the word (except for the hyphen that can be found in complex words of Царь-пушка, etc .; and the apostrophe that occurs in English words)
-            if (word.matches("[^0-9№\\p{Punct}]+[-']?[^0-9№\\p{Punct}]*")) {
+            if (word.matches("[^\\d№\\p{Punct}]+[-']?[^\\d№\\p{Punct}]*")) {
 
                 //If the word is spelled correctly, add it to the final list and make the first letter capital
                 listWords.add(word.substring(0, 1).toUpperCase() + word.substring(1));
             }
-
         }
         Collections.sort(listWords);
         System.out.println("Total number words = " + listWords.size());
