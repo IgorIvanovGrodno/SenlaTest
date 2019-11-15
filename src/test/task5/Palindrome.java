@@ -48,7 +48,7 @@ public class Palindrome {
     }
 
     /**
-     * The method accepts the number number and prints to the console palindromes of numbers from 0 to number
+     * The method accepts the number number and prints to the console palindromes of numbers from 0 to number.
      *
      * @param number
      */
