@@ -19,6 +19,7 @@ public class CheckNumber {
     public static void main(String[] args) {
 
         //The conditions of the task do not discuss the range of input data, so we use int instead of BigInteger
+        //Test comment
         int number = 0;
 
         //Read the number from the console
